@@ -1,9 +1,12 @@
 plan cd4pe_precheck::ports(
-  TargetSpec                                      $root_host = Target('localhost', 'config' => { 'transport' => 'local'}),
+  TargetSpec                                      $root_host = Target.new(name => 'localhost', 'config' => { 'transport' => 'local'}),
+  # TargetSpec                                      $root_host='localhost',
   Variant[TargetSpec, Array[TargetSpec], String]  $remote_host,
   Variant[Integer, Array[Integer]]                $ports,
 ) {
 
+  out::message('cd4pe_precheck::ports')
+  
   return $results = [$root_host].flatten.map |$r_h| {
     [$ports].flatten.map |$p| {
       $target = get_targets($remote_host)[0]

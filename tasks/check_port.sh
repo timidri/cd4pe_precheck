@@ -3,7 +3,7 @@
 output=$(curl -s -S --connect-timeout 1 $PT_host:$PT_port 2>&1)
 value=$(echo $?)
 case $value in
-    56) 
+    52|56)
         if [[ "${PT_port}" == '22' ]]; then
             echo "OK: SSH port $PT_port likely available on $PT_host"; exit 0
         fi
